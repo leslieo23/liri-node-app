@@ -36,24 +36,24 @@ request('http://www.omdbapi.com/?t='+ movie +'&y=&plot=short&tomatoes=true&r=jso
 }
 
 if (type=="spotify-this-song"){
-	var songName=process.argv[3]
-	if(songName===undefined){
+
+	var songName=process.argv[3] //song name is the third item 
+	var spotify = require('spotify'); //needs spotify npm
+	if(songName===undefined){//if the song is undefined show the song whats my age again
 		songName="whats my age again";
 	}
-	var spotify = require('spotify');
- 
 	spotify.search({ type: 'track', query: songName }, function(err, data) {
-    	if ( err ) {
+    	if ( err ) {//if there is an error, return error occrred and what the error is
         console.log('Error occurred: ' + err);
         return;
     }
- var songs = data.tacks.songs;
-    for(var i=0;i < songs.length; i++){
-    	console.log("Song Info: "+songName+ songs[i])
-    for (var a=0 ;a< songs[i].artists.length; a++){
-    	console.log("Artist: "+songs[i]+artists[a].name);
-    	console.log("Album: "+songs[i]+album.name);
-    	console.log("Link: "+songs[i]+preview_url);
+ var items = data.tacks.items; //items is the info from the tacks
+    for(var i=0;i < items.length; i++){ //loops through length of items
+    	console.log("Song Name: "+items[i].name)
+    for (var a=0 ;a< items[i].artists.length; a++){ 
+    	console.log("Artist: "+items[i]+artists[a].name);
+    	console.log("Album: "+items[i]+album.name);
+    	console.log("Link: "+items[i]+preview_url);
 
     }
     }
