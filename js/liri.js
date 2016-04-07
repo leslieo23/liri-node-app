@@ -1,6 +1,7 @@
 
 //twitter
-var type=process.argv[2]
+var keys=require
+var command=process.argv[2]
 var Twitter=require('twitter')
 var client= new Twitter({//twitter keys
   consumer_key: 'BIt2KElP7Aj7OE4KQj3f6qgca',
@@ -9,7 +10,7 @@ var client= new Twitter({//twitter keys
   access_token_secret: 'cEcupBsNhJWbwtaSTthFb5AxKRmvRKy1V6aqe8v94w44L',
 })
 
-if(type=="my-tweets"){
+if(command=="my-tweets"){
 var params = {screen_name: 'leslieo23',count:20};//parameters of twitter handle and number of tweets you want to show
 client.get('statuses/user_timeline', params, function(error, tweets, response){
   if (!error) {for(var i=0;i<tweets.length;i++){
@@ -19,7 +20,7 @@ client.get('statuses/user_timeline', params, function(error, tweets, response){
  }
  });
 }
-if(type=="movie-this"){
+if(command=="movie-this"){
 var movie= process.argv[3];
 var request = require('request');//needs request downloaded from npm
 request('http://www.omdbapi.com/?t='+ movie +'&y=&plot=short&tomatoes=true&r=json', function (error, response, body) {
@@ -35,7 +36,7 @@ request('http://www.omdbapi.com/?t='+ movie +'&y=&plot=short&tomatoes=true&r=jso
  })
 }
 
-if (type=="spotify-this-song"){
+if (command=="spotify-this-song"){
 
 	var songName=process.argv[3] //song name is the third item 
 	var spotify = require('spotify'); //needs spotify npm
@@ -50,7 +51,7 @@ if (type=="spotify-this-song"){
  var items = data.tacks.items; //items is the info from the tacks
     for(var i=0;i < items.length; i++){ //loops through length of items
     	console.log("Song Name: "+items[i].name)
-    for (var a=0 ;a< items[i].artists.length; a++){ 
+    for (var a=0 ;a< items[i].artists.length; a++){//goes through artists array 
     	console.log("Artist: "+items[i]+artists[a].name);
     	console.log("Album: "+items[i]+album.name);
     	console.log("Link: "+items[i]+preview_url);
